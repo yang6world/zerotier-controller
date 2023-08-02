@@ -36,18 +36,54 @@ RUN cd /app && git clone --progress https://ghself.markxu.online/https://github.
     && TOKEN=$(cat /var/lib/zerotier-one/authtoken.secret) \
     && echo "ZT_TOKEN=$TOKEN">> /app/ztncui/src/.env 
 
+FROM node:lts-alpine as frontend-build
+
+ENV INLINE_RUNTIME_CHUNK=false
+ENV GENERATE_SOURCEMAP=false
+ENV NODE_OPTIONS=--openssl-legacy-provider
+
+WORKDIR /app/frontend
+COPY yarn.lock .yarnrc.yml ./
+COPY .yarn/ ./.yarn/
+COPY ./frontend/package*.json /app/frontend
+RUN yarn install
+
+COPY ./frontend /app/frontend
+RUN yarn build
+
 FROM alpine:3.17
+
+WORKDIR /app/frontend/build
+
+COPY --from=frontend-build /app/frontend/build /app/frontend/build/
+
+WORKDIR /app/backend
+
+COPY yarn.lock .yarnrc.yml ./
+COPY .yarn/ ./.yarn/
+COPY ./backend/package*.json /app/backend
+RUN yarn install
+
+COPY ./backend /app/backend
+
 WORKDIR /app
 
-COPY --from=builder /app/ztncui /app/ztncui
 COPY --from=builder /app/bin /app/bin
 COPY --from=builder /app/zerotier-one.port /app/zerotier-one.port
 COPY --from=builder /var/lib/zerotier-one /var/lib/zerotier-one
+
+RUN echo "开始配置npm环境"\
+    && npm install -g --progress --verbose node-gyp --registry=https://registry.npmmirror.com\
+    && npm install  --registry=https://registry.npmmirror.com\
 
 RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.tuna.tsinghua.edu.cn/g' /etc/apk/repositories \
     && apk update\
     && apk add --no-cache npm zerotier-one
 
+ENV NODE_ENV=production
+ENV ZU_SECURE_HEADERS=true
+ENV ZU_SERVE_FRONTEND=true
+
 VOLUME [ "/app","/var/lib/zerotier-one" ]
 
-CMD /bin/sh -c "cd /var/lib/zerotier-one && ./zerotier-one -p`cat /app/zerotier-one.port` -d; cd /app/ztncui/src;npm start"
+CMD /bin/sh -c "cd /var/lib/zerotier-one && ./zerotier-one -p`cat /app/zerotier-one.port` -d;node ./backend/bin/www"
