@@ -1,0 +1,10 @@
+{
+  "users": [
+    {
+      "username": "ZeroTier",
+      "password_hash": "000000100005b0375a498491134e141d8f56f457ee89f276ab877bf58b2bb9083a6396cbc0b6f2ad5dd8a017eae60d30a00f068bbf484488",
+      "token": "178e6544dab7c67cdb82902e946860f3"
+    }
+  ],
+  "networks": []
+}

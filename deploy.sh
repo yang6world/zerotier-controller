@@ -44,6 +44,7 @@ function install() {
 
   echo "配置内容为:"
   echo "`cat ./patch/patch.json`"
+  sleep 60
 
   echo "开始安装..."
   echo "清除原有内容"

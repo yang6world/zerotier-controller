@@ -1,0 +1,56 @@
+{
+  "name": "zero-ui",
+  "version": "1.5.1",
+  "workspaces": [
+    "backend",
+    "frontend"
+  ],
+  "scripts": {
+    "postinstall": "husky install",
+    "upgradeDeps": "yarn upgrade-interactive",
+    "upgradeYarn": "yarn set version latest",
+    "cleanDeps": "cd frontend && rimraf node_modules && cd ../backend && rimraf node_modules && cd .. && rimraf node_modules",
+    "lint": "yarn prettier --write .",
+    "dev": "concurrently \"cd frontend && cross-env FAST_REFRESH=true yarn start\" \"cd backend && cross-env NODE_ENV=development ZU_DEFAULT_USERNAME=admin ZU_DEFAULT_PASSWORD=zero-ui nodemon ./bin/www --ignore data/db.json\"",
+    "build": "cd frontend && cross-env INLINE_RUNTIME_CHUNK=false GENERATE_SOURCEMAP=false yarn build",
+    "prod": "cd backend && cross-env NODE_ENV=production ZU_SECURE_HEADERS=false yarn start",
+    "release": "standard-version && git push --follow-tags origin main && git add CHANGELOG.md",
+    "commit": "yarn git-cz"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^17.0.3",
+    "@commitlint/config-conventional": "^17.0.3",
+    "commitizen": "^4.2.5",
+    "concurrently": "^7.3.0",
+    "cross-env": "^7.0.3",
+    "cz-conventional-changelog": "^3.3.0",
+    "husky": "^8.0.1",
+    "lint-staged": "^13.0.3",
+    "nodemon": "^2.0.19",
+    "prettier": "^2.7.1",
+    "rimraf": "^3.0.2",
+    "standard-version": "^9.5.0"
+  },
+  "prettier": {
+    "trailingComma": "es5",
+    "tabWidth": 2,
+    "semi": true,
+    "singleQuote": false
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
+  },
+  "lint-staged": {
+    "*.{tsx,ts,js,jsx,scss,css,js,json,md}": [
+      "yarn prettier --write"
+    ]
+  },
+  "packageManager": "yarn@3.3.1"
+}

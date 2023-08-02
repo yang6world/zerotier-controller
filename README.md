@@ -1,69 +1,5 @@
 
-QQ交流群：
-
-![image](https://user-images.githubusercontent.com/51899048/221509739-7d039726-34a1-4174-b85f-2d0cbf07bd31.png)
-
-
-- [1：ZeroTier 介绍](#1zerotier-介绍)
-- [2：为什么要自建PLANET 服务器](#2为什么要自建planet-服务器)
-- [3：开始安装](#3开始安装)
-  - [3.1：准备条件](#31准备条件)
-  - [3.2：下载项目源码](#32下载项目源码)
-  - [3.3：执行安装脚本](#33执行安装脚本)
-  - [3.4 下载 `planet` 文件](#34-下载-planet-文件)
-  - [3.5 新建网络](#35-新建网络)
-    - [3.5.1 创建网络](#351-创建网络)
-- [4.客户端配置](#4客户端配置)
-  - [4.1 Windows 配置](#41-windows-配置)
-    - [4.2 加入网络](#42-加入网络)
-  - [4.2 Linux 客户端](#42-linux-客户端)
-  - [4.3 安卓客户端配置](#43-安卓客户端配置)
-  - [4.4 MacOS 客户端配置](#44-macos-客户端配置)
-- [参考链接](#参考链接)
-- [5. 管理面板SSL配置](#5-管理面板ssl配置)
-- [6:Q\&A:](#6qa)
-  - [1. Q：为什么我ping不通目标机器？](#1-q为什么我ping不通目标机器)
-  - [2. Q：IOS客户端怎么用？](#2-qios客户端怎么用)
-  - [3. Q: 为什么看不到官方的Planet](#3-q-为什么看不到官方的planet)
-  - [4. Q：我更换了IP需要怎么处理？](#4-q我更换了ip需要怎么处理)
-
-
-# 1：ZeroTier 介绍
-
-`ZeroTier` 这一类 P2P VPN 是在互联网的基础上将自己的所有设备组成一个私有的网络，可以理解为互联网连接的局域网。最常见的场景就是在公司可以用手机直接访问家里的 NAS，而且是点对点直连，数据传输并不经由第三方服务器中转。
-
-Zerotier 在多设备之间建立了一个 `Peer to Peer VPN（P2PVPN）` 连接，如：在笔记本电脑、台式机、嵌入式设备、云资源和应用。这些设备只需要通过 `ZeroTier One` ( `ZeroTier` 的客户端) 在不同设备之间建立直接连接，即使它们位于 `NAT` 之后。连接到虚拟 LAN 的任何计算机和设备通常通过 `NAT` 或路由器设备与 `Internet` 连接，`ZeroTier One` 使用 `STUN` 和隧道来建立 `NAT` 后设备之间的 VPN 直连。
-
-简单一点说，`Zerotier` 就是通过 `P2P` 等方式实现形如交换机或路由器上 `LAN`   设备的内网互联。
-
-![zerotier](asserts/zerotier-network.png)
-
-**专有名词**
-
-`PLANET` `：行星服务器，Zerotier` 根服务器
-
-`MOON` ：卫星服务器，用户自建的私有根服务器，起到代理加速的作用
-
-`LEAF` ：网络客户端，就是每台连接到网络节点。
-
-我们本次搭建的就是 `PLANET` 行星服务器
-
-
-# 2：为什么要自建PLANET 服务器
-简单来讲就是官方的服务器在海外，我们连接的时候会存在不稳定的情况
-
-# 3：开始安装
-##  3.1：准备条件
-- 具有公网 `ip` 的服务器（需要开放 3443/tcp 端口，9993/tcp 端口，9993/udp 端口）
-- 安装 `docker`
-
-ps:如果是centos，安装docker请使用`yum install docker-ce`
-  
-## 3.2：下载项目源码
-```
-git clone https://github.com/xubiaolin/docker-zerotier-planet.git
-```
-## 3.3：执行安装脚本
+# ZeroTier-Controller
 进入项目目录
 ```
 cd docker-zerotier-planet
@@ -239,27 +175,3 @@ server {
     return 301 https: //$server_name$request_uri;
 }
 ```
-
-# 6:Q&A:
-## 1. Q：为什么我ping不通目标机器？
-A：请检查防火墙设置，`Windows` 系统需要允许 `ICMP` 入站，`Linux` 同理
-
-## 2. Q：IOS客户端怎么用？
-A：iOS 客户端插件在这里，设备需要越狱： https://github.com/lemon4ex/ZeroTieriOSFix
-
-## 3. Q: 为什么看不到官方的Planet
-A: 该项目剔除了官方服务器，只保留了自定义的Planet节点
-
-## 4. Q：我更换了IP需要怎么处理？
-A: 如果IP更换了，则需要重新部署，相当于全新部署
-
-
-# 风险声明
-
-本项目仅供学习和研究使用，不鼓励用于商业用途。我们不对任何因使用本项目而导致的任何损失负责。
-
-# 捐助和支持
-
-如果觉得本项目对您有帮助，欢迎通过扫描下方赞赏码捐助项目 :)
-
-<img src="asserts/donate.jpg" alt="donate" width="200" height="200" />
