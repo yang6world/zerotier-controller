@@ -26,7 +26,7 @@ function AddMember({ nwid, callback }) {
 
   return (
     <>
-      <Typography>Manually Add Member</Typography>
+      <Typography>手动添加成员</Typography>
       <List
         disablePadding={true}
         style={{

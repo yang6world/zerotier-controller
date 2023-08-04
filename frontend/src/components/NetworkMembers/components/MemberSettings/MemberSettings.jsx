@@ -30,7 +30,7 @@ function MemberSettings({ member, network, handleChange }) {
         <BuildIcon style={{ fontSize: 20 }} />
       </IconButton>
       <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>{"Member " + member.config.id + " settings"}</DialogTitle>
+        <DialogTitle>{"成员 " + member.config.id + " 的设置"}</DialogTitle>
         <DialogContent>
           <Grid item>
             <Checkbox
@@ -43,7 +43,7 @@ function MemberSettings({ member, network, handleChange }) {
                 "checkbox"
               )}
             />
-            <span>Allow Ethernet Bridging</span>
+            <span>允许以太网桥接</span>
           </Grid>
           <Grid item>
             <Checkbox
@@ -56,17 +56,17 @@ function MemberSettings({ member, network, handleChange }) {
                 "checkbox"
               )}
             />
-            <span>Do Not Auto-Assign IPs</span>
+            <span>不自动分配IP地址</span>
           </Grid>
           <Grid container spacing={2}>
             <Grid item xs={12}>
-              <Typography variant="h6">Capabilities</Typography>
+              <Typography variant="h6">功能</Typography>
             </Grid>
             <Grid item xs={12}>
               <Paper style={{ padding: 20 }}>
                 {Object.entries(network["capabilitiesByName"] || []).length ===
                 0
-                  ? "No capabilities defined"
+                  ? "未定义功能"
                   : ""}
                 {Object.entries(network["capabilitiesByName"] || []).map(
                   ([capName, capId]) => (
@@ -96,11 +96,11 @@ function MemberSettings({ member, network, handleChange }) {
           </Grid>
           <Grid container spacing={2}>
             <Grid item xs={12}>
-              <Typography variant="h6">Tags</Typography>
+              <Typography variant="h6">标签</Typography>
             </Grid>
             {Object.entries(network["tagsByName"] || []).length === 0 ? (
               <Grid item xs={12}>
-                <Paper style={{ padding: 20 }}>No tags defined</Paper>
+                <Paper style={{ padding: 20 }}>未定义标签</Paper>
               </Grid>
             ) : (
               ""

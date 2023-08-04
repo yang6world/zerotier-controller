@@ -89,19 +89,19 @@ function IPv4AutoAssign({ ipAssignmentPools, handleChange }) {
     },
     {
       id: "Start",
-      name: "Start",
+      name: "起点",
       cell: (row) => row["ipRangeStart"],
     },
     {
       id: "End",
-      name: "End",
+      name: "终点",
       cell: (row) => row["ipRangeEnd"],
     },
   ];
 
   return (
     <>
-      <Typography>IPv4 Auto-Assign</Typography>
+      <Typography>IPv4 自动分配”</Typography>
       <div
         style={{
           padding: "30px",
@@ -132,7 +132,7 @@ function IPv4AutoAssign({ ipAssignmentPools, handleChange }) {
             data={ipAssignmentPools}
           />
           <Divider />
-          <Typography>Add IPv4 Pool</Typography>
+          <Typography>自动分配地址池</Typography>
           <List
             style={{
               display: "flex",
@@ -142,7 +142,7 @@ function IPv4AutoAssign({ ipAssignmentPools, handleChange }) {
             <TextField
               value={start}
               onChange={handleStartInput}
-              placeholder={"Start"}
+              placeholder={"起点"}
             />
             <Divider
               orientation="vertical"
@@ -154,7 +154,7 @@ function IPv4AutoAssign({ ipAssignmentPools, handleChange }) {
             <TextField
               value={end}
               onChange={handleEndInput}
-              placeholder={"End"}
+              placeholder={"终点"}
             />
             <IconButton
               size="small"

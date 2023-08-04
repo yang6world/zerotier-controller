@@ -58,7 +58,7 @@ function LogInToken() {
         Token Log In
       </Button>
       <Dialog open={open} onClose={handleClose} onKeyPress={handleKeyPress}>
-        <DialogTitle>Log In</DialogTitle>
+        <DialogTitle>登录</DialogTitle>
         <DialogContent>
           <DialogContentText>ADVANCED FEATURE.</DialogContentText>
           <TextField
@@ -76,10 +76,10 @@ function LogInToken() {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">
-            Cancel
+            取消
           </Button>
           <Button onClick={LogIn} color="primary">
-            Log In
+            登录
           </Button>
         </DialogActions>
       </Dialog>

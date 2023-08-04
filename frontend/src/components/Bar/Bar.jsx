@@ -50,7 +50,7 @@ function Bar() {
     ...(!disabledAuth
       ? [
           {
-            name: "Log out",
+            name: "退出登录",
             divide: true,
             onClick: onLogOutClick,
           },

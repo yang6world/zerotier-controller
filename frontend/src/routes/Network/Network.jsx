@@ -72,7 +72,7 @@ function Network() {
       >
         <Grid item xs={10}>
           <Typography variant="h5">
-            You are not authorized. Please Log In
+          您未经授权。请登录
           </Typography>
         </Grid>
       </Grid>

@@ -67,7 +67,7 @@ function NetworkMembers({ network }) {
   const columns = [
     {
       id: "auth",
-      name: "Authorized",
+      name: "授权",
       minWidth: "80px",
       cell: (row) => (
         <Checkbox
@@ -79,7 +79,7 @@ function NetworkMembers({ network }) {
     },
     {
       id: "address",
-      name: "Address",
+      name: "地址",
       minWidth: "150px",
       cell: (row) => (
         <Typography variant="body2">{row.config.address}</Typography>
@@ -87,23 +87,23 @@ function NetworkMembers({ network }) {
     },
     {
       id: "name",
-      name: "Name / Description",
+      name: "名称 / 描述",
       minWidth: "250px",
       cell: (row) => <MemberName member={row} handleChange={handleChange} />,
     },
     {
       id: "ips",
-      name: "Managed IPs",
+      name: "管理 IP",
       minWidth: "220px",
       cell: (row) => <ManagedIP member={row} handleChange={handleChange} />,
     },
     {
       id: "status",
-      name: "Last Seen",
+      name: "最后在线时间",
       minWidth: "100px",
       cell: (row) =>
         row.online === 1 ? (
-          <Typography style={{ color: "#008000" }}>{"ONLINE"}</Typography>
+          <Typography style={{ color: "#008000" }}>{"在线"}</Typography>
         ) : row.controllerId === row.config.address ? (
           <Typography style={{ color: "#c5e31e" }}>{"CONTROLLER"}</Typography>
         ) : row.online === 0 ? (
@@ -113,15 +113,15 @@ function NetworkMembers({ network }) {
                   includeSeconds: false,
                   addSuffix: true,
                 })
-              : "OFFLINE"}
+              : "离线"}
           </Typography>
         ) : (
-          <Typography style={{ color: "#f1c232" }}>{"RELAYED"}</Typography>
+          <Typography style={{ color: "#f1c232" }}>{"中继"}</Typography>
         ),
     },
     {
       id: "physicalip",
-      name: "Version / Physical IP / Latency",
+      name: "版本 / 物理 IP / 延迟",
       minWidth: "220px",
       cell: (row) =>
         row.online === 1 ? (
@@ -162,7 +162,7 @@ function NetworkMembers({ network }) {
   return (
     <Accordion defaultExpanded={true}>
       <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-        <Typography>Members</Typography>
+        <Typography>成员</Typography>
       </AccordionSummary>
       <AccordionDetails>
         <Grid container direction="column" spacing={3}>

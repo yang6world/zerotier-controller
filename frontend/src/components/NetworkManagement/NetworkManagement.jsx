@@ -45,7 +45,7 @@ function NetworkManagement() {
   return (
     <Accordion>
       <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-        <Typography>Management</Typography>
+        <Typography>管理</Typography>
       </AccordionSummary>
       <AccordionDetails>
         <Button
@@ -54,7 +54,7 @@ function NetworkManagement() {
           startIcon={<DeleteIcon />}
           onClick={handleClickOpen}
         >
-          Delete Network
+          删除网络
         </Button>
         <Dialog open={open} onClose={handleClose}>
           <DialogTitle>

@@ -38,19 +38,19 @@ function HomeLoggedIn() {
         className={classes.createBtn}
         onClick={createNetwork}
       >
-        Create A Network
+        创建一个网络
       </Button>
       <Divider />
       <Grid container spacing={3} className={classes.container}>
         <Grid item xs={6}>
-          <Typography variant="h5">Controller networks</Typography>
-          {networks[0] && "Network controller address"}
+          <Typography variant="h5">控制器网络</Typography>
+          {networks[0] && "网络控制器地址"}
           <Box fontWeight="fontWeightBold">
             {networks[0] && networks[0]["id"].slice(0, 10)}
           </Box>
         </Grid>
         <Grid item xs="auto">
-          <Typography>Networks</Typography>
+          <Typography>网络</Typography>
           <Grid item>
             {networks[0] ? (
               networks.map((network) => (
@@ -59,7 +59,7 @@ function HomeLoggedIn() {
                 </Grid>
               ))
             ) : (
-              <div>Please create at least one network</div>
+              <div>请至少创建一个网络</div>
             )}
           </Grid>
         </Grid>

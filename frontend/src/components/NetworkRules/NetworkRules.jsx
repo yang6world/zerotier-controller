@@ -87,7 +87,7 @@ function NetworkRules({ network, callback }) {
   return (
     <Accordion>
       <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-        <Typography>Flow Rules</Typography>
+        <Typography>规则流</Typography>
       </AccordionSummary>
       <AccordionDetails>
         {/*   Important note: value in CodeMirror instance means INITAIL VALUE
@@ -130,7 +130,7 @@ function NetworkRules({ network, callback }) {
             </Typography>
           ) : (
             <Button variant="contained" color="primary" onClick={saveChanges}>
-              Save Changes
+              保存更改
             </Button>
           )}
         </Grid>

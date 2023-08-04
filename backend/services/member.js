@@ -31,29 +31,20 @@ async function getMemberAdditionalData(data) {
     .get("members")
     .find({ id: data.id });
 
-  const additionalData = member.get("additionalConfig").value() || {};
+  const additionalData = member.get("additionalConfig").value();
   const lastOnline = member.get("lastOnline").value() || 0;
 
   const peer = await getPeer(data.id);
   let peerData = {};
-  if (peer && !_.isEmpty(peer)) {
+  if (peer) {
     peerData.latency = peer.latency;
     if (peer.latency !== -1) peerData.online = 1;
     if (peer.latency == -1) peerData.online = 2;
     peerData.clientVersion = peer.version;
-    if (peer.paths.length > 0) {
-      let path = peer.paths.filter((p) => {
-        let ret = p.active && !p.expired;
-        if (typeof p.preferred !== "undefined") {
-          ret = ret && p.preferred;
-        }
-        return ret;
-      });
-      if (path.length > 0) {
-        peerData.lastOnline = path[0].lastReceive;
-        peerData.physicalAddress = path[0].address.split("/")[0];
-        peerData.physicalPort = path[0].address.split("/")[1];
-      }
+    if (peer.paths[0]) {
+      peerData.lastOnline = peer.paths[0].lastReceive;
+      peerData.physicalAddress = peer.paths[0].address.split("/")[0];
+      peerData.physicalPort = peer.paths[0].address.split("/")[1];
     }
   } else {
     peerData.online = 0;
@@ -85,8 +76,7 @@ async function filterDeleted(nwid, mid) {
     .get("members")
     .find({ id: mid });
 
-  let deleted = member.get("deleted").value() || false;
-  if (!deleted) return mid;
+  if (!member.get("deleted").value()) return mid;
   else return;
 }
 
@@ -105,7 +95,7 @@ async function getMembersData(nwid, mids) {
         return res;
       })
     )
-    .catch(function (err) {
+    .catch(function () {
       return [];
     });
 

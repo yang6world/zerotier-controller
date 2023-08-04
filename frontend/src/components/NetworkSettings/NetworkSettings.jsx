@@ -43,12 +43,12 @@ function NetworkSettings({ network, setNetwork }) {
   return (
     <Accordion>
       <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-        <Typography>General settings</Typography>
+        <Typography>常规设置</Typography>
       </AccordionSummary>
       <AccordionDetails>
         <Grid container direction="column" spacing={3}>
           <Grid item>
-            <Typography>Network ID</Typography>
+            <Typography>网络 ID</Typography>
             <Typography variant="h5">
               <span>{network["config"]["id"]}</span>
             </Typography>
@@ -80,14 +80,14 @@ function NetworkSettings({ network, setNetwork }) {
           </Grid>
           <Divider />
           <Grid item>
-            <Typography>Access Control</Typography>
+            <Typography>访问控制</Typography>
             <Select
               native
               value={network["config"]["private"]}
               onChange={handleChange("config", "private", "json")}
             >
-              <option value={true}>Private</option>
-              <option value={false}>Public</option>
+              <option value={true}>隐私</option>
+              <option value={false}>公开</option>
             </Select>
           </Grid>
           <Divider />
@@ -111,7 +111,7 @@ function NetworkSettings({ network, setNetwork }) {
           <Divider />
           <Grid item>
             <TextField
-              label="Multicast Recipient Limit"
+              label="组播接收者限制"
               type="number"
               value={network["config"]["multicastLimit"]}
               onChange={handleChange("config", "multicastLimit", "json")}
@@ -126,7 +126,7 @@ function NetworkSettings({ network, setNetwork }) {
               color="primary"
               onChange={handleChange("config", "enableBroadcast", "checkbox")}
             />
-            <span>Enable Broadcast</span>
+            <span>启用广播</span>
           </Grid>
           {/* TODO: */}
           {/* <Grid item>

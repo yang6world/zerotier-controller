@@ -72,10 +72,10 @@ function LogInUser() {
   return (
     <>
       <Button onClick={handleClickOpen} color="primary" variant="contained">
-        Log In
+        登录
       </Button>
       <Dialog open={open} onClose={handleClose} onKeyPress={handleKeyPress}>
-        <DialogTitle>Log In</DialogTitle>
+        <DialogTitle>登录</DialogTitle>
         <DialogContent>
           <TextField
             autoFocus
@@ -84,7 +84,7 @@ function LogInUser() {
               setUsername(e.target.value);
             }}
             margin="dense"
-            label="username"
+            label="用户名"
             type="username"
             fullWidth
           />
@@ -94,17 +94,17 @@ function LogInUser() {
               setPassword(e.target.value);
             }}
             margin="dense"
-            label="password"
+            label="密码"
             type="password"
             fullWidth
           />
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">
-            Cancel
+            取消
           </Button>
           <Button onClick={LogIn} color="primary">
-            Log In
+            登录
           </Button>
         </DialogActions>
       </Dialog>
@@ -114,7 +114,7 @@ function LogInUser() {
           vertical: "top",
           horizontal: "center",
         }}
-        message="Invalid username or password"
+        message="用户名/密码错误"
       />
     </>
   );

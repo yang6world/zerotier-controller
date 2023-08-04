@@ -43,13 +43,12 @@ function HomeLoggedOut() {
       <Grid item xs={10}>
         <Typography variant="h5">
           <span>
-            ZeroUI - ZeroTier Controller Web UI - is a web user interface for a
-            self-hosted ZeroTier network controller.
+          ZeroUI 是一个用于自托管 ZeroTier 网络控制器的 web 用户界面。
           </span>
         </Typography>
 
         <Typography>
-          <span>Please Log In to continue</span>
+          <span>请登录以继续</span>
         </Typography>
       </Grid>
     </Grid>

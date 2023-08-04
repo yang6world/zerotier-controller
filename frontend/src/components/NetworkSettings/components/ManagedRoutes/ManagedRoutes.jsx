@@ -71,12 +71,12 @@ function ManagedRoutes({ routes, handleChange }) {
     },
     {
       id: "target",
-      name: "Target",
+      name: "目标",
       cell: (row) => row["target"],
     },
     {
       id: "via",
-      name: "via",
+      name: "经过",
       cell: (row) => (row["via"] ? row["via"] : "(LAN)"),
     },
   ];
@@ -84,13 +84,13 @@ function ManagedRoutes({ routes, handleChange }) {
   return (
     <>
       <Typography style={{ paddingBottom: "10px" }}>
-        Managed Routes ({routes.length + "/128"})
+        管理路由 ({routes.length + "/128"})
       </Typography>
       <Box border={1} borderColor="grey.300">
         <Grid item style={{ margin: "10px" }}>
           <DataTable noHeader={true} columns={columns} data={routes} />
           <Divider />
-          <Typography>Add Routes</Typography>
+          <Typography>添加路由</Typography>
           <List
             style={{
               display: "flex",
@@ -100,7 +100,7 @@ function ManagedRoutes({ routes, handleChange }) {
             <TextField
               value={destination}
               onChange={handleDestinationInput}
-              placeholder={"Destination (CIDR)"}
+              placeholder={"目标地址（CIDR）"}
             />
             <Divider
               orientation="vertical"
@@ -112,7 +112,7 @@ function ManagedRoutes({ routes, handleChange }) {
             <TextField
               value={via}
               onChange={handleViaInput}
-              placeholder={"Via (Optional)"}
+              placeholder={"通过（可选）"}
             />
             <IconButton size="small" color="primary" onClick={addRouteReq}>
               <AddIcon
