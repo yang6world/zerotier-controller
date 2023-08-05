@@ -38,36 +38,16 @@ enjoy~
 ```
 
 
-## 3.4 下载 `planet` 文件
+##  下载 `planet` 文件
 脚本运行完成后，会在 `/tmp/` 目录下有个 `planet` 文件
 
 下载该文件以备用
 
-## 3.5 新建网络
-访问 `http://ip:3443` 进入controller页面
 
-![ui](asserts/ztncui.png)
-
-使用默认账号为:`admin`
-
-默认密码为:`password`
-
-### 3.5.1 创建网络
-进入后创建一个网络，可以得到一个网络ID
-
-创建网络，输入名称
-
-![ui](asserts/ztncui_create_net.png)
-
-得到网络 `id`
-
-![ui](asserts/ztncui_net_id.png)
-
-
-# 4.客户端配置
+# 客户端配置
 客户端主要为Windows, Mac, Linux, Android
 
-## 4.1 Windows 配置
+##  Windows 配置
 首先去zerotier官网下载一个zerotier客户端
 
 将 `planet` 文件覆盖粘贴到`C:\ProgramData\ZeroTier\One`中(这个目录是个隐藏目录，需要运允许查看隐藏目录才行)
@@ -81,7 +61,7 @@ Win+S 搜索 `服务`
 ![ui](asserts/restart_service.png)
 
 
-### 4.2 加入网络
+###  加入网络
 使用管理员身份打开PowerShell
 
 执行如下命令，看到join ok字样就成功了
@@ -93,7 +73,6 @@ PS C:\Windows\system32>
 
 登录管理后台可以看到有个个新的客户端，勾选Authorized就行
 
-![ui](asserts/join_net.png)
 
 执行如下命令：
 ```
@@ -108,7 +87,7 @@ PS C:\Windows\system32>
 
 到这里就加入网络成功了
 
-## 4.2 Linux 客户端
+##  Linux 客户端
 步骤如下：
 
 1. 安装linux客户端软件
@@ -119,10 +98,10 @@ PS C:\Windows\system32>
 6. 管理后台同意加入请求
 7. `zerotier-cli peers` 可以看到` planet` 角色
 
-## 4.3 安卓客户端配置
+## 安卓客户端配置
 [Zerotier 非官方安卓客户端发布：支持自建 Moon 节点 - V2EX](https://www.v2ex.com/t/768628)
 
-## 4.4 MacOS 客户端配置
+## MacOS 客户端配置
 步骤如下：
 
 1. 进入 `/Library/Application\ Support/ZeroTier/One/` 目录，并替换目录下的 `planet` 文件
