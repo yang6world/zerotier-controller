@@ -97,9 +97,43 @@ PS C:\Windows\system32>
 5. 加入网络 `zerotier-cli join` 网络 `id`
 6. 管理后台同意加入请求
 7. `zerotier-cli peers` 可以看到` planet` 角色
+8. 配置配置 Linux 的数据转发和路由控制
+```
+sudo nano /etc/sysctl.conf
+```
+在末尾加上
+```
+net.ipv4.ip_forward=1
+net.ipv4.conf.all.rp_filter=2  
+```
+然后执行激活配置文件
+```
+sudo sysctl -p
+```
+防火墙配置
+```
+sudo iptables -t nat -A POSTROUTING -o 本机网卡 -j MASQUERADE
+sudo iptables -A FORWARD -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+sudo iptables -A FORWARD -i zerotier网卡 -o 本机网卡 -j ACCEPT
+sudo iptables -A INPUT -i zerotier网卡 -j ACCEPT
+sudo iptables -A FORWARD -i zerotier网卡 -o zerotier网卡 -j ACCEPT
+sudo iptables -A FORWARD -i zerotier网卡 -j ACCEPT
+sudo iptables -t nat -A POSTROUTING -o zerotier网卡 -j MASQUERADE
+sudo iptables -t nat -A POSTROUTING -s zerotier网段/24 -j MASQUERADE
 
+```
+保存防火墙配置
+```
+sudo apt-get install iptables-persistent
+sudo netfilter-persistent save
+```
+允许 ZeroTier One 转发全局流量
+```
+sudo zerotier-cli set NetworkID allowGlobal=1
+sudo zerotier-cli set NetworkID allowDefault=1
+```
 ## 安卓客户端配置
-[Zerotier 非官方安卓客户端发布：支持自建 Moon 节点 - V2EX](https://www.v2ex.com/t/768628)
+[Zerotier Fix]([https://www.v2ex.com/t/768628](https://github.com/kaaass/ZerotierFix/releases/tag/1.0.9))
 
 ## MacOS 客户端配置
 步骤如下：
