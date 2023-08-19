@@ -160,39 +160,47 @@ sudo zerotier-cli set NetworkID allowDefault=1
 # 5. 管理面板SSL配置
 管理面板的SSL支持需要自行配置，参考Nginx配置如下：
 ```
-upstream zerotier {
-  server 127.0.0.1: 3443;
-}
-
 server {
+    listen 80;
+    listen [::]:80;
+    server_name 输入你的域名;
 
-  listen 443 ssl;
+    # Enforce HTTPS
+    return 301 https://$server_name$request_uri;
+}
+server {
+    server_name 输入你的域名;
 
-  server_name {CUSTOME_DOMAIN}; #替换自己的域名
+    ssl_session_timeout 1d;
+    ssl_session_cache shared:MozSSL:10m;
+    ssl_session_tickets off;
+    ssl_certificate /etc/ssl/fullchain.cer; #你自己的证书路径
+    ssl_certificate_key /etc/ssl/yserver.key; #你自己的证书路径
 
-  # ssl证书地址
-  ssl_certificate    pem和或者crt文件的路径;
-  ssl_certificate_key key文件的路径;
+    # dhparams file
+    listen 443 ssl http2;
+   
 
-  # ssl验证相关配置
-  ssl_session_timeout  5m;    #缓存有效期
-  ssl_ciphers ECDHE-RSA-AES128-GCM-SHA256:ECDHE:ECDH:AES:HIGH:!NULL:!aNULL:!MD5:!ADH:!RC4;    #加密算法
-  ssl_protocols TLSv1 TLSv1.1 TLSv1.2;    #安全链接可选的加密协议
-  ssl_prefer_server_ciphers on;   #使用服务器端的首选算法
+    # intermediate configuration
+    ssl_protocols TLSv1.2 TLSv1.3;
+    ssl_ciphers ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305:DHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES256-GCM-SHA384;
+    ssl_prefer_server_ciphers off;
 
+    proxy_buffering off;
 
-  location / {
-    proxy_pass http: //zerotier;
-    proxy_set_header HOST $host;
-    proxy_set_header X-Forwarded-Proto $scheme;
-    proxy_set_header X-Real-IP $remote_addr;
-    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    #include /share/nginx_proxy_default*.conf;
+
+    location / {
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header Host $http_host;
+        proxy_redirect off;
+        proxy_pass http://输入你的ip:4000;
+
+        # 如果您要使用本地存储策略，请将下一行注释符删除，并更改大小为理论最大文件尺寸
+    #     client_max_body_size 20000m;
     }
+
+
 }
 
-server {
-    listen       80;
-    server_name  {CUSTOME_DOMAIN}; //替换自己的域名
-    return 301 https: //$server_name$request_uri;
-}
 ```
