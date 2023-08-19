@@ -1,15 +1,23 @@
 
 # ZeroTier-Controller
+## 在使用此项目前请确保安装了docker
+
+``` 
+curl -fsSL get.docker.com | sh
+```
 进入项目目录
 ```
 cd docker-zerotier-planet
 ```
-
+若你要开启https请执行
 运行 `deploy.sh` 脚本
 ```
 ./deploy.sh
 ```
-
+若不开启请执行
+```
+./deploy2.sh
+```
 根据提示来选择即可，操作完成后会自动部署
 ```
 欢迎使用zerotier-planet脚本，请选择需要执行的操作：
