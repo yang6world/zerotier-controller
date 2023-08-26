@@ -66,7 +66,7 @@ function install() {
 
   echo "启动服务"
   for i in $(lsof -i:$port -t); do kill -2 $i; done
-  docker run -d   --network host   --name zerotier   --restart unless-stopped -e ZU_CONTROLLER_ENDPOINT=http://127.0.0.1:9993/   -e ZU_SECURE_HEADERS=true   -e ZU_DATAPATH=/app/backend/data/db.json   -e ZU_DEFAULT_USERNAME=$user_set   -e ZU_DEFAULT_PASSWORD=$user_password   -p 4000:4000/tcp  -p $port:$port -p $port:$port/udp  $imageName
+  docker run -d   --network host   --name zerotier   --restart unless-stopped -e ZU_CONTROLLER_ENDPOINT=http://127.0.0.1:$port/   -e ZU_SECURE_HEADERS=true   -e ZU_DATAPATH=/app/backend/data/db.json   -e ZU_DEFAULT_USERNAME=$user_set   -e ZU_DEFAULT_PASSWORD=$user_password   -p 4000:4000/tcp  -p $port:$port -p $port:$port/udp  $imageName
   docker cp zerotier-planet:/app/bin/planet /tmp/planet
 
   echo "planet文件路径为 /tmp/planet"
