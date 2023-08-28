@@ -10,7 +10,7 @@ function install() {
   read -p "端口号必须是数字，请重新输入端口号: " port
   done
 
-  read -p "是否自动获取公网IP地址？（y/n）" use_auto_ip
+  read -p "是否自动获取公网IP地址？(如果是国内服务器建议手动输入)（y/n）" use_auto_ip
 
   read -p "请输入管理页用户名" user_set
   read -p "请设置密码" user_password
