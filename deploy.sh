@@ -1,6 +1,6 @@
 #!/bin/bash
 
-imageName="zerotier-planet"
+imageName="zerotier"
 
 function install() {
   read -p "请输入zerotier-planet要使用的端口号,例如9994（数字）: " port
@@ -67,7 +67,7 @@ function install() {
   echo "启动服务"
   for i in $(lsof -i:$port -t); do kill -2 $i; done
   docker run -d   --network host   --name zerotier   --restart unless-stopped -e ZU_CONTROLLER_ENDPOINT=http://127.0.0.1:$port/   -e ZU_SECURE_HEADERS=true   -e ZU_DATAPATH=/app/backend/data/db.json   -e ZU_DEFAULT_USERNAME=$user_set   -e ZU_DEFAULT_PASSWORD=$user_password   -p 4000:4000/tcp  -p $port:$port -p $port:$port/udp  $imageName
-  docker cp zerotier-planet:/app/bin/planet /tmp/planet
+  docker cp zerotier:/app/bin/planet /tmp/planet
 
   echo "planet文件路径为 /tmp/planet"
   echo "planet server端口为: $port, 请在防火墙放行该端口的tcp和udp协议"
@@ -103,7 +103,7 @@ case "$choice" in
   ;;
 3)
   echo "导出planet到当前目录"
-  docker cp zerotier-planet:/app/bin/planet .
+  docker cp zerotier:/app/bin/planet .
   ;;
 *)
   echo "谢谢使用！"
